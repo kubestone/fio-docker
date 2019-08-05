@@ -1,8 +1,7 @@
-FROM ubuntu:18.04
-RUN apt-get update && apt-get install -y fio jq wget \
- && apt-get remove -y --purge \
- && apt-get autoremove -y \
- && rm -rf /var/lib/apt/lists/*
+FROM alpine:3.10.1
+RUN apk update \
+  && apk add --no-cache fio==3.13-r1 ca-certificates wget \
+  && update-ca-certificates
 WORKDIR /app
 COPY . .
 CMD /app/run.sh
