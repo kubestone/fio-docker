@@ -1,5 +1,5 @@
-#!/bin/bash
-set -eEuo pipefail
+#!/bin/sh
+set -eo pipefail
 
 # First remove everything from the folder
 find . -mindepth 1 -maxdepth 1 ! -name 'run.sh' -type f  -exec rm -f {} +
