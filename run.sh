@@ -1,9 +1,10 @@
 #!/bin/sh
 set -eo pipefail
 
-# First remove everything from the folder
-find . -mindepth 1 -maxdepth 1 ! -name 'run.sh' -type f  -exec rm -f {} +
-find . -mindepth 1 ! -name 'jobs' -type d -exec rm -rf {} +
+# First remove everything from the workdir
+rm -rf /data/*
+
+cd /jobs
 
 # Check required parameters
 if [ -z "$JOB_FILES" ]; then
@@ -18,7 +19,10 @@ if [ ! -z "$REMOTE_JOB_FILES" ]; then
     done
 fi
 
-# TODO: Parsable JSON output
+# Copy the jobs to the working directory
+cp $JOB_FILES /data
+cd /data
+echo "Running jobs: $JOB_FILES"
 
 # Run the jobs
 fio $JOB_FILES
