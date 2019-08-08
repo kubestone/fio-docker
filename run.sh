@@ -1,15 +1,19 @@
 #!/bin/sh
 set -eo pipefail
 
-# First remove everything from the folder
-find . -mindepth 1 -maxdepth 1 ! -name 'run.sh' -type f  -exec rm -f {} +
-find . -mindepth 1 ! -name 'jobs' -type d -exec rm -rf {} +
-
 # Check required parameters
 if [ -z "$JOB_FILES" ]; then
   echo 'Missing environment variable: $JOB_FILES'
   exit 1
 fi
+
+# Copy the jobs to the working directory
+WORKDIR=${WORKDIR:-`date +%s`}
+echo "Working directory: /data/$WORKDIR"
+cd /jobs
+mkdir -p /data/$WORKDIR
+cp $JOB_FILES /data/$WORKDIR
+cd /data/$WORKDIR
 
 # Download specified remote files
 if [ ! -z "$REMOTE_JOB_FILES" ]; then
@@ -18,7 +22,7 @@ if [ ! -z "$REMOTE_JOB_FILES" ]; then
     done
 fi
 
-# TODO: Parsable JSON output
+echo "Running jobs: $JOB_FILES"
 
 # Run the jobs
 fio $JOB_FILES
