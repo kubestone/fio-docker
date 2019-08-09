@@ -10,7 +10,7 @@ fio Docker Image based on Alpine Linux.
 ```bash
 $ docker run -v $(pwd)/data:/data -e JOB_FILES=/jobs/rand-rw.fio xridge/fio
 
-$ docker run -e JOB_FILES=/jobs/rand-rw.fio xridge/fio
+$ docker run -e JOB_FILES=/jobs/rand-read.fio xridge/fio
 ```
 
 ## License
