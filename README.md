@@ -7,10 +7,19 @@
 fio Docker Image based on Alpine Linux.
 
 ## Usage
+Run sample fio job file without volume mount (read speed inside docker):
 ```bash
-$ docker run -v $(pwd)/data:/data -e JOB_FILES=/jobs/rand-rw.fio xridge/fio
+$ docker run xridge/fio /jobs/rand-read.fio
+```
 
-$ docker run -e JOB_FILES=/jobs/rand-read.fio xridge/fio
+Run sample fio job file with volume mount:
+```bash
+$ docker run -v $(pwd)/data:/data xridge/fio /jobs/rand-read.fio
+```
+
+Run custom fio job file:
+```bash
+$ docker run -v $(pwd)/data:/data -v /path/to/job.fio:/jobs/job.fio xridge/fio /jobs/job.fio
 ```
 
 ## License
