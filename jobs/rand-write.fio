@@ -1,7 +1,7 @@
 [global]
 ioengine=libaio
 iodepth=32
-direct=1
+direct=0
 invalidate=1
 runtime=60
 size=1g
