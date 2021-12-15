@@ -1,9 +1,9 @@
 FROM alpine
 
-RUN apk add --no-cache fio
+RUN apk add --no-cache fio bash
 
 COPY jobs /jobs
 VOLUME /data
 WORKDIR /data
 
-ENTRYPOINT [ "fio" ]
+ENTRYPOINT [ "bash" ]
